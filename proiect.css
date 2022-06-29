@@ -86,7 +86,7 @@ p:hover{
 button{
     transition: width 2s,height 4s;
 }
-button:hover{
+#submit:hover,button:hover{
     background-color: gray;
 }
 #Filme
@@ -104,4 +104,5 @@ button:hover{
 @media screen and (max-width: 1000px) {
     #Poze{display: block;
     }
+    #Filme{display: block;}
   }
