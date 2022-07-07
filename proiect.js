@@ -4,8 +4,10 @@ info=['Primul său rol a fost necreditat, în anul 1990 în filmul Awakenings. A
     'Diesel a jucat Dungeons & Dragons timp de 20 de ani și a scris o carte comemorativă intitulată 30 Years of Adventure: A Celebration of Dungeons & Dragons. La cea de-a treizecea aniversare a jocului a inaugurat revista “Dragon Magazine”.',
     'Apare în anul 2006 în drama „Pledez vinovat (Find me Guilty)” și de asemenea în cea de-a treia parte a seriei „The Fast and The Furious : Tokio Drift”, nefigurând însă în casting. În vara anului 2008 apare în science-fictionul „Babylon A.D.”.',
     'Și-a făcut debutul pe scenă la vârsta de 7 ani, când a apărut în piesa “Dinosaur Door”, scrisă de Barbara Garson, produsă la Theater for the New City, în New York.'];
+culori=['black','yellow','orange','white','purple','red','pink'];
 window.onload=function(){
     //adauga si sterge elemente
+    var culoare=0;
     var n=0;
     const butoane=document.getElementsByTagName('button');
     butoane[0].onclick=function(){
@@ -13,6 +15,7 @@ window.onload=function(){
         {
             var informatii=document.getElementById('Informatii');
             var p=document.createElement('p');
+            p.className='info';
             p.innerHTML=info[n];
             n=n+1;
             informatii.appendChild(p);
@@ -24,8 +27,10 @@ window.onload=function(){
     butoane[1].onclick=function(){
         if(n>0)
         {
-            var informatii=document.getElementsByTagName('p');
-            informatii[n].remove();
+            var informatii=document.getElementById('Informatii');
+            var infor=informatii.getElementsByTagName('p');
+            console.log(infor);
+            informatii.removeChild(infor[n]);
             n=n-1;
         }
     }
@@ -45,7 +50,42 @@ window.onload=function(){
         p.innerHTML=date.toLocaleTimeString();
         timp.innerHTML=p.textContent;
     },1000);
-
+    //localStorage
+    var p=0;
+    var culoare=localStorage.getItem('culoare');
+    p=culoare;
+    var titlu=document.querySelector("#titlu h1");
+    titlu.style.color=culori[p];
+    //keydown event
+    document.addEventListener('keydown',event=>{
+            p++;
+            p=p%7;
+            var titlu=document.querySelector("#titlu h1");
+            //alert('Key'+event.key);
+            event.preventDefault();
+            event.stopPropagation();
+            titlu.style.color=culori[p];
+            localStorage.setItem('culoare',p);
+    });
+    //regex
+      /* var regName =/^[a-zA-Z]+$/;
+       const buton=document.getElementById('buton');
+        //const comentarii=document.getElementById('Comentarii');
+        buton.addEventListener('click',function(){
+            const nume=document.getElementById('lname').value;
+            const prenume=document.getElementById('fname').value;
+            const comentariu=document.getElementById('comm').value;
+            if(regName.test(nume) && regName.test(prenume))
+            {
+            var comm=document.createElement('p');
+            comm.textContent=nume+' '+prenume+': '+comentariu;
+            console.log(comm);
+            document.getElementById('Comentarii').appendChild(comm);
+            }
+            else
+                alert('Date invalide');
+        });*/
 }
+
 
 
